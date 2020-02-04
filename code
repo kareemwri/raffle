@@ -1,0 +1,70 @@
+#import relevant modules
+import random
+from collections import Counter
+
+#returns unicode number for first character in name  
+def index0(x):
+    return ord(x[0])
+
+#defines key and pair values for names and unicode value to track entrants
+def append(key,index):
+    lst.append(key)
+    dct[key]=(index)
+    
+#this function creates a numeric value to represent each name
+def namecheck(name,lists):
+    name=index0(name)
+    while name in lists:
+        x=random.randrange(1,10)
+        name+=x
+    return name
+
+#shuffles both the list and the number chosen for the winner
+def winner(l,ll):
+    lists=random.shuffle(l)
+    #llen=len(lst)
+    num=(random.randrange(0,ll))
+    return l[num]
+
+#returns name with most wins
+def win(trials,lst):
+    k=0
+    winningNum=0
+    while k<trials:
+        wlst.append(winner(lst,len(lst)))
+        k+=1
+    data = Counter(wlst)
+    w=data.most_common(1)
+    for code, iteration in w:
+        winningNum=code
+    print(dct.get(winningNum))
+    
+#intialize blank list & dictionary
+lst=[]
+dct={}
+wlst=[]
+contestants=[]
+
+#input the number of trail runs you want to run
+trials=int(input('enter number of trials: \n'))
+
+#allows you to enter usernames or actual names using commas to seperate
+#saves it as a list
+names=input('enter names: \n')
+namelist=names.split(',')
+
+#initialize a counter
+i=0
+
+#runs the name keys through the randomization and selects a winner
+#each itteraion is saves the winner
+for n in namelist:
+    contest=namecheck(n,lst)
+    contestants.append(contest)
+    append(contest,namelist[i])
+    i+=1
+lstlen=len(lst)
+print(lst)
+print(dct)
+win(trials,contestants)
+print(win)
